@@ -1,12 +1,39 @@
 [package]
 name = "utopia-cache"
-description = "A Redis-backed cache with leases and purges."
+description = "Key-value caching with expiring entries over memory, files, Redis, Redis Cluster, Memcached and Hazelcast, with sharding, pooling, circuit breaking and purge-safe leases."
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.88"
 license = "BSD-3-Clause"
 
+[features]
+default = ["redis", "filesystem"]
+# Redis (redis-rs connections) and the multiplexed Redis adapter.
+redis = ["dep:redis", "tokio/net", "tokio/io-util"]
+# Redis Cluster (redis-rs cluster client).
+redis-cluster = ["redis", "redis/cluster-async"]
+# Memcached and Hazelcast (Memcached text protocol).
+memcached = ["tokio/net", "tokio/io-util"]
+# Files under a directory.
+filesystem = ["tokio/fs"]
+
 [dependencies]
+bytes = "1"
 crc32fast = "1"
-redis = { version = "0.32", default-features = false, features = ["tokio-comp", "aio", "connection-manager", "script"] }
+flate2 = "1"
+hex = "0.4"
+indexmap = "2"
+php-std = { version = "0.1.0", git = "https://github.com/utopia-rs/php-std" }
+redis = { version = "0.32", optional = true, default-features = false, features = ["tokio-comp", "aio", "connection-manager", "script"] }
+rustix = { version = "1", default-features = false, features = ["std", "fs", "system"] }
+sha1 = "0.10"
+thiserror = "2"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time", "sync", "signal", "rt"] }
 tracing = "0.1"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time", "sync", "signal", "rt", "io-util"] }
+
+[package.metadata.utopia]
+category = "data"
+php-sync = "da0119eda7c139b8f99b13d814e5a99f9b5ac418"
