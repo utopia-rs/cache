@@ -40,4 +40,4 @@ utopia-telemetry = { version = "0.1.0", git = "https://github.com/utopia-rs/tele
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time", "sync", "signal", "rt", "io-util"] }
 
 [package.metadata.utopia]
-php-sync = "da0119eda7c139b8f99b13d814e5a99f9b5ac418"
+php-sync = "bf7bd52d83df090e06824cf3c1d0a996f28e5f8b"
