@@ -24,8 +24,10 @@ flate2 = "1"
 hex = "0.4"
 indexmap = "2"
 php-std = { version = "0.1.0", git = "https://github.com/utopia-rs/php-std" }
+postcard = { version = "1", default-features = false, features = ["use-std"] }
 redis = { version = "0.32", optional = true, default-features = false, features = ["tokio-comp", "aio", "connection-manager", "script"] }
 rustix = { version = "1", default-features = false, features = ["std", "fs", "system"] }
+serde = { version = "1", features = ["derive"] }
 sha1 = "0.10"
 thiserror = "2"
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time", "sync", "signal", "rt"] }
